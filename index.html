@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <style>
+            .done-true {
+                text-decoration: line-through;
+                color: #777777; 
+            }
+        </style>
+    </head>
+    <body ng-app="myApp" style="text-align: center">
+        
+        <h4>To Do AngularJS</h4>
+
+        <div ng-controller="MyController as ctrl">
+            <!-- <div ng-if="ctrl.isVisible">angularjs binding</div> -->
+            <input id="inputTodo" type="text" ng-model="ctrl.TodoText">
+            <!-- <div>Hello {{ctrl.myname}}</div> -->
+            <button ng-click="ctrl.AddTodo()" ng-disabled="(ctrl.ListTodos | filter: ctrl.TodoText).length != 0">Add</button>
+            <br>
+            <p>{{ctrl.Todo()}} / {{ctrl.Total()}}</p>
+            <table align="center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in ctrl.ListTodos | filter: ctrl.TodoText">
+                        <td><input type="checkbox" ng-model="x.isDone"></td>
+                        <td><input class="done-{{x.isDone}}" type="text" value="{{x.title}}"></td>
+                        <td><button ng-click="ctrl.RemoveTodo(x)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="angular.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
